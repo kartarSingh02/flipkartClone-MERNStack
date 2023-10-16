@@ -80,6 +80,7 @@ function LoginDialog({open,setOpen}) {
     const toggleSignup = () =>{
         toggleAccount(accountInitialValues.SignUp);
     }
+    // checking 
   return (
     <Dialog open={open} onClose={handleClose} PaperProps={{sx: {maxWidth:'unset'}}}>
         <Component>
