@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import {Box, Button, Dialog, TextField, Typography,styled} from '@mui/material';
+import { authenticateSignup } from '../../service/api';
 
 
 const Component = styled(Box)`
@@ -11,7 +12,7 @@ const Component = styled(Box)`
 const Image=styled(Box)`
     background:#2872f0 url(https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/login_img_c4a81e.png) center 85% no-repeat;
     height:83%;
-    width:40%;
+    width:30%;
     padding:45px 30px;
     & > p , & > h5{
         color:white;
@@ -68,9 +69,19 @@ const accountInitialValues = {
     }
 }
 
+const signupInitialValues = {
+    firstname:'',
+    lastname:'',
+    username:'',
+    contact:'',
+    email:'',
+    password:''
+}
+
 function LoginDialog({open,setOpen}) {
 
     const [account, toggleAccount] = useState(accountInitialValues.Login)
+    const [signup, setSignup] = useState(signupInitialValues)
 
     const handleClose = () =>{
         setOpen(false);
@@ -79,6 +90,18 @@ function LoginDialog({open,setOpen}) {
 
     const toggleSignup = () =>{
         toggleAccount(accountInitialValues.SignUp);
+    }
+
+    const onInputChange = (e) =>{
+        setSignup({...signup , [e.target.name] : e.target.value })
+        // console.log(signup);
+    }
+
+    const signupUser = async () =>{
+        let response=await authenticateSignup(signup)
+        // console.log(response);
+        if(!response) return;
+        handleClose();
     }
     // checking 
   return (
@@ -101,13 +124,13 @@ function LoginDialog({open,setOpen}) {
             
                 :
                 <Wrapper>
-                    <TextField variant='standard' label='Enter Firstname'></TextField>
-                    <TextField variant='standard' label='Enter Lastname'></TextField>
-                    <TextField variant='standard' label='Enter Username'></TextField>
-                    <TextField variant='standard' label='Enter Contact number'></TextField>
-                    <TextField variant='standard' label='Enter Email'></TextField>
-                    <TextField variant='standard' label='Enter Password'></TextField>
-                    <LoginButton>Signup</LoginButton>
+                    <TextField variant='standard' onChange={(e) => onInputChange(e)} name="firstname" label='Enter Firstname'></TextField>
+                    <TextField variant='standard' onChange={(e) => onInputChange(e)} name="lastname" label='Enter Lastname'></TextField>
+                    <TextField variant='standard' onChange={(e) => onInputChange(e)} name="username" label='Enter Username'></TextField>
+                    <TextField variant='standard' onChange={(e) => onInputChange(e)} name="contact" label='Enter Contact number'></TextField>
+                    <TextField variant='standard' onChange={(e) => onInputChange(e)} name="email" label='Enter Email'></TextField>
+                    <TextField variant='standard' onChange={(e) => onInputChange(e)} name="password" label='Enter Password'></TextField>
+                    <LoginButton onClick={()=> signupUser()}>Signup</LoginButton>
                 </Wrapper>
             }
         </Component>
