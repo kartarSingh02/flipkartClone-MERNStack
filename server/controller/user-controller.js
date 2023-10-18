@@ -1,3 +1,4 @@
+import { response } from 'express';
 import User from '../model/user-schema.js'
 
 export const userSignup=async (request,response)=>{
@@ -17,6 +18,25 @@ export const userSignup=async (request,response)=>{
     }
     catch(error){
         // console.log('error',error)
+        response.status(500).json({message: error.message})
+    }
+}
+
+export const userLogin = async(request,response)=>{
+    try{
+        const username = request.body.username;
+        const password = request.body.password;
+
+        let user = await User.findOne({username:username, password:password})
+
+        if(user){
+            response.status(200).json({ data : user})
+        }
+        else {
+            repsonse.status(401).json('Invalid Credentials')
+        }
+    }
+    catch(error){
         response.status(500).json({message: error.message})
     }
 }
