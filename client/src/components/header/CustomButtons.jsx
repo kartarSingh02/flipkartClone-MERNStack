@@ -28,6 +28,11 @@ const LoginButton = styled(Button)`
     box-shadow:nonw;
     font-weight:600;
     height: 32px;
+
+    &:hover{
+        background: #FB641B;
+        color:#fff
+    }
 `
 
 

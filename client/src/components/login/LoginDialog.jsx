@@ -32,7 +32,13 @@ const LoginButton = styled(Button)`
     background: #FB641B;
     color:#fff;
     height:48px;
-    border-radius:2px;
+    border-radius:4px;
+
+    &:hover{
+        background: #FF7E3E;
+        color:white;
+        box-shadow:1 1 1 1 #000
+    }
 `
 
 const RequestOTP = styled(Button)`
@@ -61,7 +67,15 @@ const Error = styled(Typography)`
     font-size:10px;
     color:#ff6161;
     line-height:0;
-    margin-bottom:5px;
+    ${'' /* margin-bottom:5px; */}
+    font-weight:600
+`
+
+const ErrorSignup = styled(Typography)`
+    font-size:10px;
+    color:#ff6161;
+    line-height:0;
+    ${'' /* margin-bottom:5px; */}
     font-weight:600
 `
 
@@ -99,11 +113,13 @@ function LoginDialog({open,setOpen}) {
     const {setAccount} = useContext(DataContext)
     const [login,setLogin] = useState(loginInitialValues)
     const [error , setError] = useState(false)
+    const [errorSignup,setErrorSignup] = useState(false)
 
     const handleClose = () =>{
         setOpen(false);
         toggleAccount(accountInitialValues.Login);
         setError(false)
+        setErrorSignup(false)
     }
 
     const toggleSignup = () =>{
@@ -117,11 +133,12 @@ function LoginDialog({open,setOpen}) {
 
     const signupUser = async () =>{
         let response=await authenticateSignup(signup)
-        // console.log(response);
-        if(!response) return;
-        handleClose();
-        setAccount(signup.firstname);
-        
+        console.log("response from signup",response);
+        if(!response) setErrorSignup(true);
+        else{
+            handleClose();
+            setAccount(signup.firstname);
+        }
     }
 
     const onValueChange = (e)=>{
@@ -161,6 +178,7 @@ function LoginDialog({open,setOpen}) {
             
                 :
                 <Wrapper>
+                    {errorSignup && <ErrorSignup>Input Fields Missing</ErrorSignup>}
                     <TextField variant='standard' onChange={(e) => onInputChange(e)} name="firstname" label='Enter Firstname'></TextField>
                     <TextField variant='standard' onChange={(e) => onInputChange(e)} name="lastname" label='Enter Lastname'></TextField>
                     <TextField variant='standard' onChange={(e) => onInputChange(e)} name="username" label='Enter Username'></TextField>
