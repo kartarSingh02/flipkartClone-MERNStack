@@ -7,6 +7,7 @@ import { getProducts } from '../../redux/actions/productActions';
 import {useDispatch, useSelector} from 'react-redux';
 import Slide from './Slide';
 import MidSlide from './MidSlide';
+import MidSection from './MidSection';
 
 const Component = styled(Box)`
     padding:10px;
@@ -33,6 +34,7 @@ function Home() {
             <Banner/>
             {/* only chaning the first one as its divided into tow things one slide and other advertisement */}
             <MidSlide products={products} title='Deals of the day' timer={true}/>
+            <MidSection/>
             <Slide products={products} title='Top Picks' timer={false}/>
             <Slide products={products} title='Season sale' timer={false}/>
             <Slide products={products} title='Mens wear' timer={false}/>
