@@ -4,6 +4,7 @@ import {AppBar,Toolbar,Box, styled, Typography} from '@mui/material'
 // Components import 
 import Search from './Search';
 import CustomButtons from './CustomButtons';
+import {Link} from 'react-router-dom'
 
 // This is to use to style the material UI, basically Override and where we want to use this style replace that MateiralUI into the name which we have given
 const StyledHeader = styled(AppBar)`
@@ -11,9 +12,11 @@ const StyledHeader = styled(AppBar)`
     height:55px;
 `
 
-const Component = styled(Box)`
+const Component = styled(Link)`
     margin-left: 12%;
     line-height:0;
+    text-decoration:none;
+    color:inherit;
 `
 
 const SubHeading = styled(Typography)`
@@ -40,16 +43,16 @@ const subURL = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/i
     <div>
       <StyledHeader>
         <Toolbar style={{minHeight:55}}>
-        <Component>
-            <img src={logoURL} alt="logo" style={{width:75}} />
-            <Box style={{display:'flex'}}>
-                <SubHeading>Explore&nbsp;
-                    <Box component="span" style={{color: '#FFE500'}}>Plus</Box>
-                </SubHeading>
-                <PlusImage src={subURL} alt='sub-logo'/>
-            </Box>
-            
-        </Component>
+            <Component to='/'>
+                <img src={logoURL} alt="logo" style={{width:75}} />
+                <Box style={{display:'flex'}}>
+                    <SubHeading>Explore&nbsp;
+                        <Box component="span" style={{color: '#FFE500'}}>Plus</Box>
+                    </SubHeading>
+                    <PlusImage src={subURL} alt='sub-logo'/>
+                </Box>     
+            </Component>
+
         {/* search component */}
         <Search/>
         {/* Button Component */}

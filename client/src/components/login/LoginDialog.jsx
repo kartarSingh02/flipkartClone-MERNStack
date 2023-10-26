@@ -7,6 +7,7 @@ const Component = styled(Box)`
     height:70vh;
     width:90vh;
     display:flex;
+    overflow:hidden;
 `
 
 const Image=styled(Box)`
