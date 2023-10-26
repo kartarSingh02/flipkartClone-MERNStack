@@ -11,3 +11,16 @@ export const getProducts = async (request , response) =>{
         // console.log("Not able to get products", error)
     }
 }
+
+export const getProductById = async (request, response) =>{
+    try{
+        const id = request.params.id;
+        // console.log(id);
+        const product = await Product.findOne({'id':id});
+        response.status(200).json(product);
+    }
+    catch(error){
+        response.status(500).json({message:error.message});
+        // console.log("Not able to get products", error)
+    }
+}
