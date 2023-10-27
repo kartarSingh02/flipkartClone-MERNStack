@@ -2,20 +2,32 @@ import { Box, Button, styled } from '@mui/material'
 import React from 'react';
 import {ShoppingCart as Cart , FlashOn as Flash} from '@mui/icons-material';
 
-const LeftContainer = styled(Box)`
-  min-width:40%;
-  padding:40px 0 0 80px
-`
+const LeftContainer = styled(Box)(({theme})=>({
+  minWidth:'40%',
+  padding:'40px 0 0 80px',
+  [theme.breakpoints.down('md')]:{
+    padding:'20px 40px'
+  }
+}))
+
+
 
 const Image =styled('img')({
     padding:'15px'
 })
 
-const StyledButton = styled(Button)`
-    width:48%;
-    height:40px;
-    border-radius:2px
-`
+const StyledButton = styled(Button)(({theme})=>({
+    width:'48%',
+    height:40,
+    borderRadius:2,
+    [theme.breakpoints.down('lg')]:{
+      width:'46%'
+    },
+    [theme.breakpoints.down('s')]:{
+      width:'48%',
+    }
+}))
+
 
 function ActionItem({product}) {
   return (
