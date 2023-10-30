@@ -6,18 +6,27 @@ import LoginDialog from '../login/LoginDialog';
 import { DataContext } from '../../context/DataProvider';
 import Profile from './Profile';
 
-const Wrapper = styled(Box)(({theme})=>({
-    display:'flex',
+const Wrapper = styled(Box)(({ theme }) => ({
     margin: '0 3% 0 auto',
-    '& > *' :{
-        marginRight: 40,
-        fontSize:16,
-        alignItems:'center'
+    display: 'flex',
+    '& > *': {
+        marginRight: '40px !important',
+        textDecoration: 'none',
+        color: '#FFFFFF',
+        // fontSize: 12,
+        alignItems: 'center',
+        [theme.breakpoints.down('sm')]: {
+            color: '#2874f0',
+            alignItems: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            marginTop: 10
+        }
     },
-    [theme.breakpoints.down('md')]:{
-        display: 'block',
+    [theme.breakpoints.down('sm')]: {
+        display: 'block'
     }
-}))
+}));
 
 
 const Container = styled(Box)(({theme})=>({
@@ -29,8 +38,8 @@ const Container = styled(Box)(({theme})=>({
  
 
 const LoginButton = styled(Button)`
-    color: #2874f0;
-    background:#fff;
+    color: #fff;
+    background:#FB641B;
     text-transform:none;
     padding: 5px 40px;
     border-radius: 3px;
@@ -38,8 +47,8 @@ const LoginButton = styled(Button)`
     font-weight:600;
     height: 32px;
 
-    &:hover{
-        background: #FB641B;
+    &:hover {
+        background-color: #FFA24B;
         color:#fff
     }
 `
