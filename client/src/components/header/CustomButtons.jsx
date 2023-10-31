@@ -2,6 +2,7 @@ import { Box, Button, Typography, styled } from '@mui/material';
 import React, {useContext, useState} from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LoginDialog from '../login/LoginDialog';
+import { useNavigate } from 'react-router-dom';
 
 import { DataContext } from '../../context/DataProvider';
 import Profile from './Profile';
@@ -48,7 +49,7 @@ const LoginButton = styled(Button)`
     height: 32px;
 
     &:hover {
-        background-color: #FFA24B;
+        background-color: #FF7E3E;
         color:#fff
     }
 `
@@ -57,9 +58,13 @@ const LoginButton = styled(Button)`
 function CustomButtons() {
     const [open, setOpen] = useState(false);
     const {account, setAccount} = useContext(DataContext);
-
+    const navigate = useNavigate();
     const OpenDialog = () =>{
         setOpen(true)
+    }
+
+    const goToCart = () =>{
+        navigate('/cart')
     }
 
   return (
@@ -72,7 +77,7 @@ function CustomButtons() {
         <Typography style={{ marginTop: 3, width: 135}}>Become a Seller</Typography>
         <Typography style={{ marginTop: 3}}>More</Typography>
 
-        <Container>
+        <Container style={{cursor:'pointer'}} onClick={goToCart}>
             <ShoppingCartIcon/>
             <Typography>Cart</Typography>
         </Container>

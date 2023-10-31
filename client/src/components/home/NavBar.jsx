@@ -26,16 +26,18 @@ const Text = styled(Typography)`
 
 function NavBar() {
   return (
-    <Component>
-        {
-            navData.map(data=>(
-                <Container>
-                    <img src={data.url} alt="products" style={{ width: 65}}/>
-                    <Text>{data.text}</Text>
-                </Container>
-            ))
-        }
-    </Component>
+    <Box style={{backgroundColor:'#fff'}}>
+        <Component>
+            {
+                navData.map(data=>(
+                    <Container>
+                        <img src={data.url} alt="products" style={{ width: 65}}/>
+                        <Text>{data.text}</Text>
+                    </Container>
+                ))
+            }
+        </Component>
+    </Box>
   )
 }
 
