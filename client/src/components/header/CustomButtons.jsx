@@ -1,8 +1,9 @@
-import { Box, Button, Typography, styled } from '@mui/material';
+import { Box, Button, Typography,Badge, styled } from '@mui/material';
 import React, {useContext, useState} from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LoginDialog from '../login/LoginDialog';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { DataContext } from '../../context/DataProvider';
 import Profile from './Profile';
@@ -59,6 +60,9 @@ function CustomButtons() {
     const [open, setOpen] = useState(false);
     const {account, setAccount} = useContext(DataContext);
     const navigate = useNavigate();
+
+    const {cartItems} = useSelector(state => state.cart);
+
     const OpenDialog = () =>{
         setOpen(true)
     }
@@ -78,8 +82,10 @@ function CustomButtons() {
         <Typography style={{ marginTop: 3}}>More</Typography>
 
         <Container style={{cursor:'pointer'}} onClick={goToCart}>
-            <ShoppingCartIcon/>
-            <Typography>Cart</Typography>
+            <Badge badgeContent={cartItems?.length} color='secondary'>
+                <ShoppingCartIcon/>
+            </Badge>    
+            <Typography style={{marginLeft:10}}>Cart</Typography>
         </Container>
         <LoginDialog open={open} setOpen={setOpen}/>
     </Wrapper>

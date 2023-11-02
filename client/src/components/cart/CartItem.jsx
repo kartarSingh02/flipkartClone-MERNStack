@@ -1,7 +1,8 @@
  import React from 'react'
  import { Box, Button, Typography, styled } from '@mui/material'
  import {addEllipsis} from '../../utils/common-utils'
-
+ import { useDispatch } from 'react-redux';
+ import { removeFromCart } from '../../redux/actions/cartAction';
  import GroupedButton from './GroupedButton'
 
  const Component= styled(Box)`
@@ -30,8 +31,14 @@ const Remove = styled(Button)`
     font-weight:600;
 `
 
- function CartItem({item}) {
+function CartItem({item}) {
 const fassured = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fa_62673a.png';
+
+const dispatch = useDispatch();
+
+const removeItemFromCart= (id) =>{
+    dispatch(removeFromCart(id))
+}
    return (
      <Component>
        <LeftContainer >
@@ -41,14 +48,14 @@ const fassured = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion
        <Box style={{margin:20}}>
             <Typography>{addEllipsis(item.title.longTitle)}</Typography>
             <SmallText>Seller: RetailNet 
-                <Box component='span'><img src={fassured} style={{width:50,marginLeft:10 }}/></Box>
+                <Box component='span'><img src={fassured} alt='flipkartIcon' style={{width:50,marginLeft:10 }}/></Box>
             </SmallText>
             <Typography style={{margin:'8px 0'}}>
                 <Box component='span' style={{fontWeight:600, fontSize:18}}>₹{item.price.cost}</Box>&nbsp;&nbsp;
                 <Box component='span' style={{color:'#878787'}}><strike>₹{item.price.mrp}</strike></Box>&nbsp;&nbsp;
                 <Box component='span' style={{color:'#388E3C'}}>{item.price.discount}</Box>
             </Typography>
-            <Remove>Remove</Remove>
+            <Remove onClick={() =>removeItemFromCart(item.id)}>Remove</Remove>
        </Box>
      </Component>
    )
